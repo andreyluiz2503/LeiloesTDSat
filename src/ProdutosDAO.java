@@ -1,3 +1,4 @@
+import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ public class ProdutosDAO {
     // Método para listar os produtos vendidos do banco de dados
     public ArrayList<ProdutosDTO> listarVendas() throws java.sql.SQLException {
         conn = new conectaDAO().connectDB();
-        String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+        String sql = "SELECT * FROM produtos";
 
         ArrayList<ProdutosDTO> vendas = new ArrayList<>();
         prep = conn.prepareStatement(sql);
@@ -56,9 +57,10 @@ public class ProdutosDAO {
     // Método para listar todos os produtos (não vendidos) do banco de dados
     public ArrayList<ProdutosDTO> listarProdutos() throws java.sql.SQLException {
         conn = new conectaDAO().connectDB();
-        String sql = "SELECT * FROM produtos";
-
         ArrayList<ProdutosDTO> produtos = new ArrayList<>();
+        
+        String sql = "SELECT * FROM produtos WHERE status = 'Vendido'"; // SQL para listar produtos vendidos
+        
         prep = conn.prepareStatement(sql);
         resultset = prep.executeQuery();
         while (resultset.next()) {
@@ -111,4 +113,5 @@ public class ProdutosDAO {
             if (conn != null) conn.close(); // Fechando a conexão
         }
     }
+
 }

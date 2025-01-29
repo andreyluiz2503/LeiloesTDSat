@@ -134,6 +134,11 @@ public class listagemVIEW extends javax.swing.JFrame {
         int idProduto = Integer.parseInt(id_produto_venda.getText());  // Pegando o ID do produto
         boolean vendaRealizada = produtosDAO.venderProduto(idProduto);  // Lógica de venda
 
+        if (vendaRealizada) {
+            listarProdutos();  // Atualiza a tabela imediatamente
+        } else {
+            JOptionPane.showMessageDialog(null, "Falha ao vender o produto. Verifique o ID.");
+        }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Erro ao realizar a venda: " + e.getMessage());
     } catch (NumberFormatException e) {

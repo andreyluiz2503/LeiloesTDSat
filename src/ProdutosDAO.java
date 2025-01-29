@@ -56,9 +56,10 @@ public class ProdutosDAO {
     // Método para listar todos os produtos (não vendidos) do banco de dados
     public ArrayList<ProdutosDTO> listarProdutos() throws java.sql.SQLException {
         conn = new conectaDAO().connectDB();
-        String sql = "SELECT * FROM produtos";
-
         ArrayList<ProdutosDTO> produtos = new ArrayList<>();
+        
+        String sql = "SELECT * FROM produtos WHERE status = 'Vendido'"; // SQL para listar produtos vendidos
+        
         prep = conn.prepareStatement(sql);
         resultset = prep.executeQuery();
         while (resultset.next()) {
